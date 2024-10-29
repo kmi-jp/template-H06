@@ -34,14 +34,14 @@ def columns():
 
 
 def test_iteratiron(names, salaries, cash_flow, columns):
-    data = DataFrame([names, salaries, cash_flow], columns=columns)
+    data = DataFrame([names, salaries, cash_flow], index=columns)
 
     assert isinstance(data.__iter__(), types.GeneratorType)
     assert list(data) == columns.labels
 
 
 def test_items(names, salaries, cash_flow, columns):
-    data = DataFrame([names, salaries, cash_flow], columns=columns)
+    data = DataFrame([names, salaries, cash_flow], index=columns)
 
     assert isinstance(data.items(), zip)
 
@@ -57,14 +57,14 @@ def test_items(names, salaries, cash_flow, columns):
 
 
 def test_index(names, salaries, cash_flow, columns):
-    data = DataFrame([names, salaries, cash_flow], columns=columns)
+    data = DataFrame([names, salaries, cash_flow], index=columns)
 
-    assert data.index == names.index
+    assert data.values_index == names.index
 
 
 @pytest.mark.parametrize(
     "function",
-    [DataFrame, DataFrame.from_csv, DataFrame.get, DataFrame.shape, DataFrame.index, DataFrame.items],
+    [DataFrame, DataFrame.from_csv, DataFrame.get, DataFrame.shape, DataFrame.values_index, DataFrame.items],
 )
 def test_docstrings(function):
     assert function.__doc__ is not None
