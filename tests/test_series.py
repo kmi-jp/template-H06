@@ -40,9 +40,16 @@ def test_items(users, salaries):
     assert values == salaries.values
 
 
+def test_iterate_over(salaries):
+    gen = salaries.iterate_over()
+
+    for i  in range(10):
+        assert next(gen) == salaries.values[i % 4]
+
+
 @pytest.mark.parametrize(
     "function",
-    [Series, Series.get, Series.from_csv, Series.shape, Series.items],
+    [Series, Series.get, Series.from_csv, Series.shape, Series.items, Series.iterate_over],
 )
 def test_docstrings(function):
     assert function.__doc__ is not None

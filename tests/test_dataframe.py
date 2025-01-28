@@ -56,15 +56,9 @@ def test_items(names, salaries, cash_flow, columns):
     assert test_values == [names, salaries, cash_flow]
 
 
-def test_index(names, salaries, cash_flow, columns):
-    data = DataFrame([names, salaries, cash_flow], index=columns)
-
-    assert data.values_index == names.index
-
-
 @pytest.mark.parametrize(
     "function",
-    [DataFrame, DataFrame.from_csv, DataFrame.get, DataFrame.shape, DataFrame.values_index, DataFrame.items],
+    [DataFrame, DataFrame.from_csv, DataFrame.get, DataFrame.shape, DataFrame.items],
 )
 def test_docstrings(function):
     assert function.__doc__ is not None
