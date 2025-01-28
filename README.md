@@ -21,16 +21,11 @@ assert [label for label in users] == ["user 1", "user 2", "user 3", "user 4"]
 * `IndexedContainer.items(self)` - metoda pro podporu iterování přes dvojice `(key, value)`, musí vracet iterator (`zip`). Funguje totožně jako `.items()` u slovníku 
 * `IndexedContainer.__getitem__(self, key)` - podpora operátoru `[]`, funkcionalita jako u slovníku, pokud `key` neexistuje, vyvolá `KeyError`. Upravte metodu `IndexedContainer.get(self, key)`, aby používala nově implementovaný operátor `[]`
 
+Příklady použití jsou uvedeny u `Series` a `DataFrame` (metody definované pro `IndexedContainer` by i pro ní fungovali obdobně).
+
 ## Třída `Series`
 * `Series.__iter__(self)` - metoda pro podporu iterování, musí vracet generátor hodnot z `Series.values`
 *  `Series.iterate_over(self)` - metoda, která vrátí nekonečný generátor hodnot z `Series.values`; pokud dojde nakonec seznamu, tak pokračuje při další iteraci zase od začátku
-
-## Třída `DataFrame`
-* `DataFrame.__iter__(self)` - metoda pro podporu iterování, musí vracet generátor klíčů z `DataFrame.index`
-
-## Příklady použití
-
-Zde uvedené příklady jsou demonstrovány na třídách `Series` a `DataFrame` (metody definované pro `IndexedContainer` by i pro ní fungovali obdobně)
 
 ```python
 from data.series import Series
@@ -48,6 +43,9 @@ gen = salaries.iterate_over()
 for i  in range(10):
     assert next(gen) == salaries.values[i % 4]
 ```
+
+## Třída `DataFrame`
+* `DataFrame.__iter__(self)` - metoda pro podporu iterování, musí vracet generátor klíčů z `DataFrame.index`
 
 ```python
 from data.series import Series
